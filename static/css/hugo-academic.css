@@ -244,7 +244,7 @@ ul.ul-edu li .description p.course {
     font-size: 1em;
 }
 
-ul.ul-edu li .description p.institution {
+ul.ul-edu li .description p.institution p.grad_details {
     font-size: 0.88em;
 }
 
