@@ -175,6 +175,49 @@
 {{ end }}
 
 
+<!-- Mini-Projects Section -->
+{{ $miniprojects_len := len (where .Data.Pages "Type" "miniproject") }}
+{{ if gt $miniprojects_len 0 }}
+<section id="miniprojects" class="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-4 section-heading">
+                <h1>{{ with .Site.Params.miniprojects.title }}{{ . | markdownify }}{{ end }}</h1>
+                {{ with .Site.Params.miniprojects.subtitle }}<p>{{ . | markdownify }}</p>{{ end }}
+            </div>
+            <div class="col-xs-12 col-md-8">
+                <ul class="fa-ul">
+                    {{ range where .Data.Pages "Type" "miniproject" }}
+                    <li>
+                        <span class="miniproject-title">
+                        {{ if .Content }}<a href="{{ .Permalink }}">{{ else }}{{ with .Params.external_link }}<a href="{{ . }}">{{ end }}{{ end }}
+                        <i class="fa-li fa fa-files-o pub-icon" aria-hidden="true"></i>
+                        {{ .Title }}
+                        {{ if .Content }}</a >{{ else }}{{ with .Params.external_link }}</a>{{ end }}{{ end }}
+                        </span>
+
+                        {{ with .Params.summary }}<p class="miniproject-summary">{{ . }}</p>{{ end }}
+
+                        {{ if isset .Params "tags" }}
+                        {{ $tagsLen := len .Params.tags }}
+                        {{ if gt $tagsLen 0 }}
+                        <div class="miniproject-tags">
+                            <i class="fa fa-tags"></i>
+                            {{ range $k, $v := .Params.tags }}
+                            {{ . }}{{ if lt $k (sub $tagsLen 1) }}, {{ end }}
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                        {{ end }}
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{{ end }}
+
 <!-- Custom Sections -->
 {{ range $index, $page := where .Data.Pages "Type" "home" }}
 {{ if and (isset .Params "section_id") (not (eq .Params.section_id 0)) }}
