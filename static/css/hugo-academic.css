@@ -37,6 +37,7 @@ body {
     /* Offset body content by navbar height. */
     margin-top: 71px;
     padding-top: 0;
+    counter-reset: captions;
 }
 @media screen and (max-width: 768px) {
     body {
@@ -95,6 +96,7 @@ figcaption:before {
     font-weight: 700;
     text-transform: uppercase;
     content: "Figure " counter(captions) ": ";
+    counter-increment: captions;
 }
 
 figcaption {
@@ -104,7 +106,7 @@ figcaption {
     font-size: 1rem;
     margin-bottom: 1.65rem;
     font-family: 'Lato', sans-serif;
-    counter-increment: captions;
+    text-align: center;
 }
 
 figcaption h4 {
