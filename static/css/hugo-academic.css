@@ -457,6 +457,33 @@ section#projects.home-section .project-tags {
 }
 
 /*************************************************
+ *  Mini-Projects
+ **************************************************/
+
+section#miniprojects.home-section li {
+    margin-bottom: 20px;
+}
+
+section#miniprojects.home-section li:last-of-type {
+    margin-bottom: 0;
+}
+
+section#miniprojects.home-section .miniproject-title {
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+section#miniprojects.home-section .miniproject-summary {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+section#miniprojects.home-section .miniproject-tags {
+    font-size: 14px;
+    color: #9c9c9c;
+}
+
+/*************************************************
  *  Contact
  **************************************************/
 
