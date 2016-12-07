@@ -1,8 +1,8 @@
 {{ $is_list := .is_list }}
 {{ $ := .content }}
 
-{{ with $.Params.url_pdf }}<a class="btn btn-primary btn-outline{{ if $is_list }} btn-xs{{end}}" href="{{ . | absURL }}">PDF</a>{{ end }}
 {{ with $.Params.url_arxiv }}<a class="btn btn-primary btn-outline{{ if $is_list }} btn-xs{{end}}" href="{{ . | absURL }}">ArXiv</a>{{ end }}
+{{ with $.Params.url_pdf }}<a class="btn btn-primary btn-outline{{ if $is_list }} btn-xs{{end}}" href="{{ . | absURL }}">PDF</a>{{ end }}
 {{ with $.Params.url_slides }}<a class="btn btn-primary btn-outline{{ if $is_list }} btn-xs{{end}}" href="{{ . | absURL }}">Slides</a>{{ end }}
 {{ with $.Params.url_demo }}<a class="btn btn-primary btn-outline{{ if $is_list }} btn-xs{{end}}" href="{{ . | absURL }}">Demo</a>{{ end }}
 {{ with $.Params.url_video }}<a class="btn btn-primary btn-outline{{ if $is_list }} btn-xs{{end}}" href="{{ . | absURL }}">Video</a>{{ end }}
