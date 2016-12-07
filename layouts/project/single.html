@@ -5,15 +5,102 @@
     <article class="article article-project" itemscope itemtype="http://schema.org/Article">
         {{ if .Params.image }}
         <img src="{{ $.Site.BaseURL }}img/{{ .Params.image }}" class="article-banner" itemprop="image">
-        {{end}}
+        {{  end  }}
 
-        <h1 itemprop="name">{{ .Title }}</h1>
+        <div class="project-title">
+            <h1 itemprop="name">{{ .Title }}</h1>
+            {{ if .Params.authors }}
+            <span class="project-authors" itemprop="author">
+                {{ with .Params.authors }}
+                {{ delimit . ", " }}
+                {{ end }}
+            </span>
+            {{  end  }}
+        </div>
+
+        <p class="project-abstract" itempropr="text">{{ .Params.summary }}</p>
 
         {{ with .Params.external_link }}<a class="btn btn-primary btn-outline" href="{{ . }}">Go to Project Site</a><div class="space-below"></div>{{ end }}
 
-        <div class="article-style" itemprop="articleBody">
-            {{ .Content }}
+        {{ if .Params.course }}
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 project-row-heading">Associated Course</div>
+                    <div class="col-xs-12 col-sm-9" itemprop="datePublished">{{ .Params.course | markdownify }}</div>
+                </div>
+            </div>
         </div>
+        <div class="visible-xs space-below"></div>
+        {{ end }}
+
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 project-row-heading">Completion Date</div>
+                    <div class="col-xs-12 col-sm-9" itemprop="datePublished">{{ .Date.Format "January 2006" }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="visible-xs space-below"></div>
+
+        {{ if .Params.publication }}
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 project-row-heading">Publication</div>
+                    <div class="col-xs-12 col-sm-9">{{ .Params.publication | markdownify }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="visible-xs space-below"></div>
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 project-row-heading">Date</div>
+                    <div class="col-xs-12 col-sm-9" itemprop="datePublished">{{ .PublicationDate.Format "January 2006" }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="visible-xs space-below"></div>
+        {{ end }}
+
+        <div class="row" style="padding-top: 10px">
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 project-row-heading" style="line-height:34px;">Tags</div>
+                    <div class="col-xs-12 col-sm-9">
+                        {{ if isset $.Params "tags" }}
+                        {{ $tagsLen := len $.Params.tags }}
+                        {{ if gt $tagsLen 0 }}
+                        {{ range $k, $v := $.Params.tags }}
+                        <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize | lower }}">{{ . }}</a>{{ if lt $k (sub $tagsLen 1) }}, {{ end }}
+                        {{ end }}
+                        {{ end }}
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="visible-xs space-below"></div>
+
+        <div class="row" style="padding-top: 10px">
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-3 project-row-heading" style="line-height:34px;">Links</div>
+                    <div class="col-xs-12 col-sm-9">
+
+                        {{ partial "project_links" (dict "content" . "is_list" 0) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="visible-xs space-below"></div>
+
+        <div class="space-below"></div>
+
+        <div class="article-style" itemprop="articleBody">{{ .Content }}</div>
     </article>
 
     {{ partial "section_pager.html" . }}

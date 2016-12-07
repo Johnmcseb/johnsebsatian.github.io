@@ -483,6 +483,33 @@ section#miniprojects.home-section .miniproject-tags {
     color: #9c9c9c;
 }
 
+article .project-title {
+    margin-bottom: 5px;
+}
+
+article .project-authors {
+    font-style: italic;
+    line-height: 30px; /* Match share bar line height. */
+}
+
+article .project-list-item {
+    margin-bottom: 40px;
+}
+
+.project-list-item .project-authors {
+    font-style: normal;
+    font-size: .8em;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.project-list-item .project-publication {
+    font-style: normal;
+    font-size: .8em;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
 /*************************************************
  *  Contact
  **************************************************/
