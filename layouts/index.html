@@ -166,13 +166,13 @@
                         <div class="project-publication">{{ .Params.publication | markdownify }}</div>
                         {{ end }}
 
+                        {{ with .Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
+
                         {{ if .Params.image_preview }}
                         <a href="{{ .Permalink }}">
                             <img src="{{ $.Site.BaseURL }}img/{{ .Params.image_preview }}" class="pub-banner" itemprop="image">
                         </a>
                         {{ end }}
-
-                        {{ with .Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
 
                         <div class="project-links">
                             {{ partial "project_links" (dict "content" . "is_list" 1) }}
@@ -213,15 +213,38 @@
             <div class="col-xs-12 col-md-8">
                 <ul class="fa-ul">
                     {{ range where .Data.Pages "Type" "miniproject" }}
-                    <li>
-                        <span class="miniproject-title">
+                    <li class="project-list-item">
+                        <span class="project-title">
                         {{ if .Content }}<a href="{{ .Permalink }}">{{ else }}{{ with .Params.external_link }}<a href="{{ . }}">{{ end }}{{ end }}
                         <i class="fa-li fa fa-files-o pub-icon" aria-hidden="true"></i>
                         {{ .Title }}
                         {{ if .Content }}</a >{{ else }}{{ with .Params.external_link }}</a>{{ end }}{{ end }}
                         </span>
 
-                        {{ with .Params.summary }}<p class="miniproject-summary">{{ . }}</p>{{ end }}
+                        {{ if .Params.authors }}
+                        <div class="project-authors">
+                            {{ with .Params.authors }}
+                            {{ delimit . ", " }}
+                            {{ end }}
+                        </div>
+                        {{ end }}
+                        {{ if .Params.publication_short }}
+                        <div class="project-publication">{{ .Params.publication_short | markdownify }}</div>
+                        {{ else if .Params.publication }}
+                        <div class="project-publication">{{ .Params.publication | markdownify }}</div>
+                        {{ end }}
+
+                        {{ with .Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
+
+                        {{ if .Params.image_preview }}
+                        <a href="{{ .Permalink }}">
+                            <img src="{{ $.Site.BaseURL }}img/{{ .Params.image_preview }}" class="pub-banner" itemprop="image">
+                        </a>
+                        {{ end }}
+
+                        <div class="project-links">
+                            {{ partial "project_links" (dict "content" . "is_list" 1) }}
+                        </div>
 
                         {{ if isset .Params "tags" }}
                         {{ $tagsLen := len .Params.tags }}
